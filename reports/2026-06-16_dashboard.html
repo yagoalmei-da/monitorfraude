@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monitor de Sites Fraudulentos</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f3f4f6; color: #111827; font-size: 14px; }
+
+  /* HEADER */
+  .header { background: #1e2533; color: #fff; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .header-left { display: flex; align-items: center; gap: 10px; }
+  .header-left h1 { font-size: 18px; font-weight: 700; }
+  .header-left p { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+  .header-right { display: flex; align-items: center; gap: 16px; }
+  .header-right .last { font-size: 12px; color: #94a3b8; }
+  .btn-run { background: #ef4444; color: #fff; border: none; border-radius: 6px; padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .btn-run:hover { background: #dc2626; }
+
+  /* STATS */
+  .stats { display: flex; gap: 16px; padding: 20px 24px 8px; }
+  .stat-card { background: #fff; border-radius: 8px; padding: 18px 24px; flex: 1; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .stat-card .value { font-size: 36px; font-weight: 800; line-height: 1; }
+  .stat-card .label { font-size: 11px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: .05em; margin-top: 6px; }
+  .stat-card.red   .value { color: #ef4444; }
+  .stat-card.green .value { color: #10b981; }
+  .stat-card.blue  .value { color: #3b82f6; }
+  .stat-card.indigo .value { color: #6366f1; }
+
+  /* MAIN */
+  .main { padding: 12px 24px 32px; }
+
+  /* ALERT */
+  .alert { background: #fff7ed; border-left: 4px solid #f97316; border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; color: #9a3412; }
+  .alert strong { font-weight: 700; }
+
+  /* TABLE CARD */
+  .card { background: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.08); overflow: hidden; }
+  .card-header { padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #f1f5f9; flex-wrap: wrap; gap: 8px; }
+  .card-header h2 { font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+  .filters { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .filter-input { border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 10px; font-size: 13px; outline: none; color: #374151; }
+  .filter-input:focus { border-color: #3b82f6; }
+  .filter-select { border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 28px 6px 10px; font-size: 13px; outline: none; color: #374151; appearance: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") no-repeat right 10px center; cursor: pointer; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { border-bottom: 1px solid #f1f5f9; }
+  thead th { padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: .05em; }
+  tbody tr { border-bottom: 1px solid #f9fafb; transition: background .1s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #f8fafc; }
+  tbody td { padding: 12px 14px; vertical-align: top; font-size: 13px; }
+  td.domain a { color: #3b82f6; text-decoration: none; font-weight: 500; }
+  td.domain a:hover { text-decoration: underline; }
+  td.uf span { display: inline-block; background: #f1f5f9; color: #374151; border-radius: 4px; padding: 2px 7px; font-size: 12px; font-weight: 600; }
+  td.motivo { color: #4b5563; max-width: 240px; line-height: 1.5; }
+  td.enc { color: #9ca3af; white-space: nowrap; }
+  td.query span { background: #f1f5f9; color: #374151; border-radius: 4px; padding: 3px 8px; font-size: 12px; }
+
+  /* BADGE */
+  .badge { display: inline-block; border-radius: 20px; padding: 3px 10px; font-size: 12px; font-weight: 700; }
+  .badge-alto  { background: #fee2e2; color: #b91c1c; }
+  .badge-medio { background: #ffedd5; color: #c2410c; }
+  .badge-baixo { background: #fefce8; color: #a16207; }
+
+  /* PAGINATION */
+  .pagination { padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; font-size: 13px; color: #6b7280; }
+  .pag-buttons { display: flex; gap: 4px; }
+  .pag-btn { border: 1px solid #e2e8f0; background: #fff; border-radius: 4px; padding: 4px 10px; font-size: 13px; cursor: pointer; color: #374151; }
+  .pag-btn.active { background: #1e40af; color: #fff; border-color: #1e40af; }
+  .pag-btn:hover:not(.active) { background: #f8fafc; }
+
+  /* HISTORY */
+  .history-card { background: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.08); margin-top: 16px; overflow: hidden; }
+  .history-card .card-header { border-bottom: 1px solid #f1f5f9; }
+  .history-body { padding: 16px 18px; }
+  .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; font-size: 13px; }
+  .bar-row .date { width: 100px; color: #6b7280; }
+  .bar-wrap { flex: 1; background: #f1f5f9; border-radius: 4px; height: 14px; overflow: hidden; }
+  .bar { height: 100%; background: #ef4444; border-radius: 4px; transition: width .4s; }
+  .bar-row .count { width: 28px; text-align: right; font-weight: 700; color: #ef4444; }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 20px; color: #9ca3af; font-size: 12px; }
+  footer span { margin: 0 4px; }
+
+  /* HIDDEN */
+  .row-hidden { display: none; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <span style="font-size:20px">🔍</span>
+    <div>
+      <h1>Monitor de Sites Fraudulentos</h1>
+      <p>Débitos Veiculares · Varredura automática quinzenal · Zapay &amp; Gringo</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="last">Última varredura: 16/06, 18:00</span>
+    <button class="btn-run" onclick="alert('Varredura agendada via GitHub Actions.\nPróxima execução automática: 01/07/2026')">▶ Executar agora</button>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-card red">
+    <div class="value">9</div>
+    <div class="label">Sites Suspeitos</div>
+  </div>
+  <div class="stat-card green">
+    <div class="value">+1</div>
+    <div class="label">Novos (vs varredura anterior)</div>
+  </div>
+  <div class="stat-card blue">
+    <div class="value">8</div>
+    <div class="label">UFs Monitoradas</div>
+  </div>
+  <div class="stat-card indigo">
+    <div class="value">24</div>
+    <div class="label">Queries Executadas</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ALERT -->
+  <div class="alert">
+    ⚠️ <strong>5 site(s) de alto risco</strong> identificados na última varredura. Verifique imediatamente.
+  </div>
+
+  <!-- TABLE CARD -->
+  <div class="card">
+    <div class="card-header">
+      <h2>⚠️ Sites Suspeitos Encontrados</h2>
+      <div class="filters">
+        <input class="filter-input" id="searchInput" type="text" placeholder="Filtrar sites..." oninput="applyFilters()">
+        <select class="filter-select" id="ufFilter" onchange="applyFilters()">
+          <option value="">Todas as UFs</option>
+          <option>SP</option><option>SC</option><option>MG</option>
+          <option>BA</option><option>GO</option><option>BR</option>
+        </select>
+        <select class="filter-select" id="riscoFilter" onchange="applyFilters()">
+          <option value="">Todos os riscos</option>
+          <option>ALTO</option><option>MEDIO</option><option>BAIXO</option>
+        </select>
+      </div>
+    </div>
+
+    <table id="suspectTable">
+      <thead>
+        <tr>
+          <th>Domínio / URL</th>
+          <th>UF</th>
+          <th>Risco</th>
+          <th>Termo de Busca</th>
+          <th>Motivo</th>
+          <th>Enc.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-uf="SP" data-risco="ALTO">
+          <td class="domain"><a href="https://ipva-fazenda-sp.org" target="_blank">ipva-fazenda-sp.org</a></td>
+          <td class="uf"><span>SP</span></td>
+          <td><span class="badge badge-alto">ALTO</span></td>
+          <td class="query"><span>pagar ipva SP</span></td>
+          <td class="motivo">Domínio imita SEFAZ/Fazenda SP usando .org fora do .gov.br</td>
+          <td class="enc">16/06</td>
+        </tr>
+        <tr data-uf="SC" data-risco="ALTO">
+          <td class="domain"><a href="https://sc-debito.com" target="_blank">sc-debito.com</a></td>
+          <td class="uf"><span>SC</span></td>
+          <td><span class="badge badge-alto">ALTO</span></td>
+          <td class="query"><span>pagar debitos SC</span></td>
+          <td class="motivo">Padrão &lt;sigla&gt;-debito.com imitando DETRAN SC em domínio .com suspeito</td>
+          <td class="enc">16/06</td>
+        </tr>
+        <tr data-uf="SC" data-risco="ALTO">
+          <td class="domain"><a href="https://detran.sc" target="_blank">detran.sc</a></td>
+          <td class="uf"><span>SC</span></td>
+          <td><span class="badge badge-alto">ALTO</span></td>
+          <td class="query"><span>detran consulta placa SC</span></td>
+          <td class="motivo">TLD .sc (Seychelles) imita sigla de estado BR — se passa pelo detran.sc.gov.br oficial</td>
+          <td class="enc">16/06</td>
+        </tr>
+        <tr data-uf="MG" data-risco="ALTO">
+          <td class="domain"><a href="https://transito.mg" target="_blank">transito.mg</a></td>
+          <td class="uf"><span>MG</span></td>
+          <td><span class="badge badge-alto">ALTO</span></td>
+          <td class="query"><span>pagar debitos MG</span></td>
+          <td class="motivo">TLD .mg (Madagascar) imitando autoridade de trânsito de MG — apareceu em múltiplas queries</td>
+          <td class="enc">16/06</td>
+        </tr>
+        <tr data-uf="BA" data-risco="ALTO">
+          <td class="domain"><a href="https://detran.ba" target="_blank">detran.ba</a></td>
+          <td class="uf"><span>BA</span></td>
+          <td><span class="badge badge-alto">ALTO</span></td>
+          <td class="query"><span>detran consulta placa BA</span></td>
+          <td class="motivo">TLD .ba (Bósnia-Herzegovina) para se passar pelo detran.ba.gov.br oficial</td>
+          <td class="enc">16/06</td>
+        </tr>
+        <tr data-uf="GO" data-risco="MEDIO">
+          <td class="domain"><a href="https://zapay.portaldotransito.com.br/detran/go" target="_blank">zapay.portaldotransito.com.br</a></td>
+          <td class="uf"><span>GO</span></td>
+          <td><span class="badge badge-medio">MEDIO</span></td>
+          <td class="query"><span>pagar debitos GO</span></td>
+          <td class="motivo">Marca Zapay usada como subdomínio de site terceiro não autorizado</td>
+          <td class="enc">16/06</td>
+        </tr>
+        <tr data-uf="BR" data-risco="MEDIO">
+          <td class="domain"><a href="https://consultaplaca.store" target="_blank">consultaplaca.store</a></td>
+          <td class="uf"><span>BR</span></td>
+          <td><span class="badge badge-medio">MEDIO</span></td>
+          <td class="query"><span>detran consulta placa PR</span></td>
+          <td class="motivo">TLD .store incomum, sem CNPJ público, sem histórico verificável</td>
+          <td class="enc">16/06</td>
+        </tr>
+        <tr data-uf="SC" data-risco="MEDIO">
+          <td class="domain"><a href="https://online.prontopaguei.com" target="_blank">online.prontopaguei.com</a></td>
+          <td class="uf"><span>SC</span></td>
+          <td><span class="badge badge-medio">MEDIO</span></td>
+          <td class="query"><span>pagar ipva SC</span></td>
+          <td class="motivo">Subdomínio de site desconhecido oferecendo parcelamento de IPVA SC, credenciais não verificadas</td>
+          <td class="enc">16/06</td>
+        </tr>
+        <tr data-uf="BR" data-risco="BAIXO">
+          <td class="domain"><a href="https://keplaca.com" target="_blank">keplaca.com</a></td>
+          <td class="uf"><span>BR</span></td>
+          <td><span class="badge badge-baixo">BAIXO</span></td>
+          <td class="query"><span>detran consulta placa PR</span></td>
+          <td class="motivo">Serviço de consulta por placa com escopo amplo, sem CNPJ público — investigação manual recomendada</td>
+          <td class="enc">16/06</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <span id="paginationInfo">Mostrando <strong>1</strong> a <strong>9</strong> de <strong>9</strong> resultados</span>
+      <div class="pag-buttons">
+        <button class="pag-btn">←</button>
+        <button class="pag-btn active">1</button>
+        <button class="pag-btn">→</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="history-card">
+    <div class="card-header">
+      <h2>📈 Histórico (últimas varreduras)</h2>
+    </div>
+    <div class="history-body">
+      <div class="bar-row">
+        <span class="date">19/05/2026</span>
+        <div class="bar-wrap"><div class="bar" style="width:100%"></div></div>
+        <span class="count">18</span>
+      </div>
+      <div class="bar-row">
+        <span class="date">16/06/2026</span>
+        <div class="bar-wrap"><div class="bar" style="width:50%"></div></div>
+        <span class="count">9</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<footer>
+  <span>Monitoramento de fraudes</span>·
+  <span>Atualizado automaticamente (dias 1 e 15)</span>·
+  <span>Yago Teixeira</span>·
+  <span>Corpay</span>
+</footer>
+
+<script>
+function applyFilters() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const uf = document.getElementById('ufFilter').value;
+  const risco = document.getElementById('riscoFilter').value;
+  const rows = document.querySelectorAll('#suspectTable tbody tr');
+  let visible = 0;
+  rows.forEach(row => {
+    const text = row.textContent.toLowerCase();
+    const rowUf = row.dataset.uf;
+    const rowRisco = row.dataset.risco;
+    const show = (!search || text.includes(search))
+              && (!uf || rowUf === uf)
+              && (!risco || rowRisco === risco);
+    row.classList.toggle('row-hidden', !show);
+    if (show) visible++;
+  });
+  document.getElementById('paginationInfo').innerHTML =
+    `Mostrando <strong>1</strong> a <strong>${visible}</strong> de <strong>${visible}</strong> resultados`;
+}
+</script>
+</body>
+</html>
