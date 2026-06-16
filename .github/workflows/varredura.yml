@@ -5,6 +5,11 @@ on:
     - cron: "0 10 1 * *"   # dia 1 de cada mês, 10h UTC
     - cron: "0 10 15 * *"  # dia 15 de cada mês, 10h UTC
   workflow_dispatch:
+    inputs:
+      test:
+        description: "Modo teste (1 query, 1 crédito)"
+        type: boolean
+        default: false
 
 jobs:
   varredura:
@@ -22,7 +27,12 @@ jobs:
       - name: Executar varredura
         env:
           SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
-        run: python scripts/varredura.py
+        run: |
+          if [ "${{ inputs.test }}" = "true" ]; then
+            python scripts/varredura.py --test
+          else
+            python scripts/varredura.py
+          fi
 
       - name: Commit e push do relatório
         run: |

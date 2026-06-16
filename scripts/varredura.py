@@ -6,6 +6,7 @@ Executa 24 queries × 3 páginas, filtra pela safelist e gera relatório.
 
 import os
 import re
+import sys
 import json
 import time
 import urllib.request
@@ -153,12 +154,16 @@ def serpapi_call(query, location, start):
         return json.loads(resp.read())
 
 
-def run():
+def run(test_mode=False):
     now = datetime.now(timezone.utc)
     date_str = now.strftime("%Y-%m-%d")
     time_str = now.strftime("%Y-%m-%d %H:%M UTC")
 
-    print(f"[{time_str}] Iniciando varredura...")
+    queries = QUERIES[:1] if test_mode else QUERIES
+    if test_mode:
+        print(f"[{time_str}] Modo teste — 1 query, 1 página (1 crédito)")
+    else:
+        print(f"[{time_str}] Iniciando varredura completa...")
     safelist = load_safelist()
     print(f"  Safelist: {len(safelist)} domínios carregados")
 
@@ -167,9 +172,11 @@ def run():
     api_calls = 0
     suspects = []  # list of dicts
 
-    for query, location in QUERIES:
+    pages = [0] if test_mode else [0, 10, 20]
+
+    for query, location in queries:
         uf = query.split()[-1]  # SP, SC, MG...
-        for page, start in enumerate([0, 10, 20], start=1):
+        for page, start in enumerate(pages, start=1):
             try:
                 data = serpapi_call(query, location, start)
                 api_calls += 1
@@ -505,4 +512,4 @@ function applyFilters() {{
 
 
 if __name__ == "__main__":
-    run()
+    run(test_mode="--test" in sys.argv)
