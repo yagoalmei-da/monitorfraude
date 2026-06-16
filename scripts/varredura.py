@@ -229,11 +229,18 @@ def run():
     print(f"  API calls: {api_calls} créditos consumidos")
 
     # gerar relatório
+    out_dir = ROOT / "reports"
+    out_dir.mkdir(exist_ok=True)
+
     report = generate_report(date_str, time_str, api_calls, ads_total, ads_filtered, suspects)
-    out = ROOT / "reports" / f"{date_str}_varredura.md"
-    out.parent.mkdir(exist_ok=True)
-    out.write_text(report)
-    print(f"\nRelatório salvo em: {out}")
+    out_md = out_dir / f"{date_str}_varredura.md"
+    out_md.write_text(report)
+    print(f"\nRelatório salvo em: {out_md}")
+
+    html = generate_dashboard(date_str, time_str, api_calls, ads_total, ads_filtered, suspects)
+    out_html = out_dir / f"{date_str}_dashboard.html"
+    out_html.write_text(html)
+    print(f"Dashboard salvo em:  {out_html}")
 
     if alto:
         print("\n⚠️  AÇÃO IMEDIATA — Sites de ALTO RISCO:")
@@ -308,6 +315,193 @@ def generate_report(date_str, time_str, api_calls, total, filtered, suspects):
     ]
 
     return "\n".join(lines)
+
+
+def generate_dashboard(date_str, time_str, api_calls, total, filtered, suspects):
+    alto  = [s for s in suspects if s["risco"] == "ALTO"]
+    medio = [s for s in suspects if s["risco"] == "MEDIO"]
+    baixo = [s for s in suspects if s["risco"] == "BAIXO"]
+
+    def badge(risco):
+        cls = {"ALTO": "badge-alto", "MEDIO": "badge-medio", "BAIXO": "badge-baixo"}.get(risco, "")
+        return f'<span class="badge {cls}">{risco}</span>'
+
+    rows_html = ""
+    for s in suspects:
+        domain_url = s["url"] or f"https://{s['domain']}"
+        rows_html += f"""
+        <tr data-uf="{s['uf']}" data-risco="{s['risco']}">
+          <td class="domain"><a href="{domain_url}" target="_blank">{s['domain']}</a></td>
+          <td class="uf"><span>{s['uf']}</span></td>
+          <td>{badge(s['risco'])}</td>
+          <td class="query"><span>{s['query']}</span></td>
+          <td class="motivo">{s['motivo']}</td>
+          <td class="enc">{date_str[5:]}</td>
+        </tr>"""
+
+    ufs = sorted({s["uf"] for s in suspects})
+    uf_options = "\n".join(f"<option>{u}</option>" for u in ufs)
+
+    alert_html = ""
+    if alto:
+        alert_html = f'<div class="alert">⚠️ <strong>{len(alto)} site(s) de alto risco</strong> identificados na última varredura. Verifique imediatamente.</div>'
+
+    bar_max = max(len(suspects), 1)
+    bar_pct = int(len(suspects) / bar_max * 100)
+
+    return f"""<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monitor de Sites Fraudulentos — {date_str}</title>
+<style>
+  *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
+  body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f3f4f6; color: #111827; font-size: 14px; }}
+  .header {{ background: #1e2533; color: #fff; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }}
+  .header-left {{ display: flex; align-items: center; gap: 10px; }}
+  .header-left h1 {{ font-size: 18px; font-weight: 700; }}
+  .header-left p {{ font-size: 12px; color: #94a3b8; margin-top: 2px; }}
+  .header-right {{ display: flex; align-items: center; gap: 16px; }}
+  .header-right .last {{ font-size: 12px; color: #94a3b8; }}
+  .btn-run {{ background: #ef4444; color: #fff; border: none; border-radius: 6px; padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer; }}
+  .stats {{ display: flex; gap: 16px; padding: 20px 24px 8px; }}
+  .stat-card {{ background: #fff; border-radius: 8px; padding: 18px 24px; flex: 1; box-shadow: 0 1px 3px rgba(0,0,0,.08); }}
+  .stat-card .value {{ font-size: 36px; font-weight: 800; line-height: 1; }}
+  .stat-card .label {{ font-size: 11px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: .05em; margin-top: 6px; }}
+  .stat-card.red .value {{ color: #ef4444; }} .stat-card.green .value {{ color: #10b981; }}
+  .stat-card.blue .value {{ color: #3b82f6; }} .stat-card.indigo .value {{ color: #6366f1; }}
+  .main {{ padding: 12px 24px 32px; }}
+  .alert {{ background: #fff7ed; border-left: 4px solid #f97316; border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; color: #9a3412; }}
+  .card {{ background: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.08); overflow: hidden; }}
+  .card-header {{ padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #f1f5f9; flex-wrap: wrap; gap: 8px; }}
+  .card-header h2 {{ font-size: 15px; font-weight: 700; }}
+  .filters {{ display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }}
+  .filter-input, .filter-select {{ border: 1px solid #e2e8f0; border-radius: 6px; padding: 6px 10px; font-size: 13px; outline: none; color: #374151; }}
+  .filter-select {{ padding-right: 28px; appearance: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") no-repeat right 10px center; cursor: pointer; }}
+  table {{ width: 100%; border-collapse: collapse; }}
+  thead th {{ padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid #f1f5f9; }}
+  tbody tr {{ border-bottom: 1px solid #f9fafb; }}
+  tbody tr:last-child {{ border-bottom: none; }}
+  tbody tr:hover {{ background: #f8fafc; }}
+  tbody td {{ padding: 12px 14px; vertical-align: top; font-size: 13px; }}
+  td.domain a {{ color: #3b82f6; text-decoration: none; font-weight: 500; }}
+  td.domain a:hover {{ text-decoration: underline; }}
+  td.uf span {{ display: inline-block; background: #f1f5f9; color: #374151; border-radius: 4px; padding: 2px 7px; font-size: 12px; font-weight: 600; }}
+  td.motivo {{ color: #4b5563; max-width: 240px; line-height: 1.5; }}
+  td.enc {{ color: #9ca3af; white-space: nowrap; }}
+  td.query span {{ background: #f1f5f9; color: #374151; border-radius: 4px; padding: 3px 8px; font-size: 12px; }}
+  .badge {{ display: inline-block; border-radius: 20px; padding: 3px 10px; font-size: 12px; font-weight: 700; }}
+  .badge-alto {{ background: #fee2e2; color: #b91c1c; }} .badge-medio {{ background: #ffedd5; color: #c2410c; }} .badge-baixo {{ background: #fefce8; color: #a16207; }}
+  .pagination {{ padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; font-size: 13px; color: #6b7280; }}
+  .pag-buttons {{ display: flex; gap: 4px; }}
+  .pag-btn {{ border: 1px solid #e2e8f0; background: #fff; border-radius: 4px; padding: 4px 10px; font-size: 13px; cursor: pointer; color: #374151; }}
+  .pag-btn.active {{ background: #1e40af; color: #fff; border-color: #1e40af; }}
+  .history-card {{ background: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.08); margin-top: 16px; overflow: hidden; }}
+  .history-body {{ padding: 16px 18px; }}
+  .bar-row {{ display: flex; align-items: center; gap: 12px; margin-bottom: 10px; font-size: 13px; }}
+  .bar-row .date {{ width: 100px; color: #6b7280; }}
+  .bar-wrap {{ flex: 1; background: #f1f5f9; border-radius: 4px; height: 14px; overflow: hidden; }}
+  .bar {{ height: 100%; background: #ef4444; border-radius: 4px; }}
+  .bar-row .count {{ width: 28px; text-align: right; font-weight: 700; color: #ef4444; }}
+  footer {{ text-align: center; padding: 20px; color: #9ca3af; font-size: 12px; }}
+  .row-hidden {{ display: none; }}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-left">
+    <span style="font-size:20px">🔍</span>
+    <div>
+      <h1>Monitor de Sites Fraudulentos</h1>
+      <p>Débitos Veiculares · Varredura automática quinzenal · Zapay &amp; Gringo</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="last">Última varredura: {time_str}</span>
+    <button class="btn-run" onclick="alert('Varredura agendada via GitHub Actions.\\nPróxima execução automática: dias 1 e 15 do mês.')">▶ Executar agora</button>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat-card red"><div class="value">{len(suspects)}</div><div class="label">Sites Suspeitos</div></div>
+  <div class="stat-card green"><div class="value">{len(alto)}</div><div class="label">Alto Risco</div></div>
+  <div class="stat-card blue"><div class="value">8</div><div class="label">UFs Monitoradas</div></div>
+  <div class="stat-card indigo"><div class="value">{api_calls}</div><div class="label">Queries Executadas</div></div>
+</div>
+
+<div class="main">
+{alert_html}
+  <div class="card">
+    <div class="card-header">
+      <h2>⚠️ Sites Suspeitos Encontrados</h2>
+      <div class="filters">
+        <input class="filter-input" id="searchInput" type="text" placeholder="Filtrar sites..." oninput="applyFilters()">
+        <select class="filter-select" id="ufFilter" onchange="applyFilters()">
+          <option value="">Todas as UFs</option>
+          {uf_options}
+        </select>
+        <select class="filter-select" id="riscoFilter" onchange="applyFilters()">
+          <option value="">Todos os riscos</option>
+          <option>ALTO</option><option>MEDIO</option><option>BAIXO</option>
+        </select>
+      </div>
+    </div>
+    <table id="suspectTable">
+      <thead><tr>
+        <th>Domínio / URL</th><th>UF</th><th>Risco</th>
+        <th>Termo de Busca</th><th>Motivo</th><th>Enc.</th>
+      </tr></thead>
+      <tbody>{rows_html}</tbody>
+    </table>
+    <div class="pagination">
+      <span id="paginationInfo">Mostrando <strong>1</strong> a <strong>{len(suspects)}</strong> de <strong>{len(suspects)}</strong> resultados</span>
+      <div class="pag-buttons">
+        <button class="pag-btn">←</button>
+        <button class="pag-btn active">1</button>
+        <button class="pag-btn">→</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="history-card">
+    <div class="card-header"><h2>📈 Histórico</h2></div>
+    <div class="history-body">
+      <div class="bar-row">
+        <span class="date">{date_str}</span>
+        <div class="bar-wrap"><div class="bar" style="width:{bar_pct}%"></div></div>
+        <span class="count">{len(suspects)}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>Monitoramento de fraudes</span> ·
+  <span>Atualizado automaticamente (dias 1 e 15)</span> ·
+  <span>Yago Teixeira</span> ·
+  <span>Corpay</span>
+</footer>
+<script>
+function applyFilters() {{
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const uf = document.getElementById('ufFilter').value;
+  const risco = document.getElementById('riscoFilter').value;
+  const rows = document.querySelectorAll('#suspectTable tbody tr');
+  let visible = 0;
+  rows.forEach(row => {{
+    const show = (!search || row.textContent.toLowerCase().includes(search))
+              && (!uf || row.dataset.uf === uf)
+              && (!risco || row.dataset.risco === risco);
+    row.classList.toggle('row-hidden', !show);
+    if (show) visible++;
+  }});
+  document.getElementById('paginationInfo').innerHTML =
+    `Mostrando <strong>1</strong> a <strong>${{visible}}</strong> de <strong>${{visible}}</strong> resultados`;
+}}
+</script>
+</body>
+</html>"""
 
 
 if __name__ == "__main__":
