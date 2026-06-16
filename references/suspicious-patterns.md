@@ -1,11 +1,28 @@
 # Padrões de Identificação de Fraude: Débitos Veiculares
 
 ## 1. Padrões de Domínio Suspeito
-- Domínios genéricos imitando órgãos oficiais: ipva-sp.com, detranbr.net, detran-online.com
-- Uso de palavras-chave sem domínio .gov.br: consultaplaca.io, pagardebito.com, debitoveiculo.net
-- Domínios com hífen ou variações: detran-sp.com, sefaz-online.net
+
+### 1a. Abuso de TLD de país como sigla de estado brasileiro (CRÍTICO)
+Fraudadores registram domínios usando TLDs de países cujas siglas coincidem com estados BR:
+- `.sc` (Seychelles) → imita Santa Catarina: ex: `detran.sc` em vez de `detran.sc.gov.br`
+- `.mg` (Madagascar) → imita Minas Gerais: ex: `transito.mg`
+- `.ba` (Bósnia) → imita Bahia: ex: `detran.ba`
+- `.go` (não existe, mas monitorar `.go.com`, `.gov-go.com`)
+- `.ms`, `.mt`, `.pa`, `.ro`, `.to`, `.ac`, `.rr`, `.ap` — monitorar variações
+Qualquer domínio `detran.<sigla-estado>` ou `sefaz.<sigla-estado>` sem `.gov.br` é fraude.
+
+### 1b. Domínios que imitam nomenclatura oficial
+- Combinar palavras oficiais sem .gov.br: `ipva-fazenda-sp.org`, `sc-debito.com`
+- Padrão `<órgão>-<estado>.<tld>`: `detran-sp.com`, `sefaz-rj.net`
+- Padrão `<serviço><estado>.<tld>`: `ipvasp.com`, `debitosmg.net`
+- Padrão `consulta<serviço>.<tld>`: `consultadeplaca.com`, `consultadeplaca.net`
+- Nomes genéricos: `ipva-sp.com`, `detranbr.net`, `pagardebito.com`
+- Domínios com hífen: `detran-online.com`, `ipva-online.net`
 - Domínios registrados há menos de 1 ano
-- TLDs incomuns para serviços brasileiros: .io, .net, .info, .online, .site, .xyz
+
+### 1c. TLDs suspeitos para serviços brasileiros
+.org, .net, .info, .online, .site, .xyz, .io, .store, .click, .top
+(Serviços oficiais brasileiros usam exclusivamente .gov.br ou .com.br)
 
 ## 2. Cobranças Indevidas
 - Cobrar taxa de "consulta" (consulta oficial é GRATUITA no Detran/Sefaz)
