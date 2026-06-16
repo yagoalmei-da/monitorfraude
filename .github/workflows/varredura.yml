@@ -1,0 +1,33 @@
+name: Varredura de Fraudes
+
+on:
+  schedule:
+    - cron: "0 10 1 * *"   # dia 1 de cada mês, 10h UTC
+    - cron: "0 10 15 * *"  # dia 15 de cada mês, 10h UTC
+  workflow_dispatch:
+
+jobs:
+  varredura:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Executar varredura
+        env:
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+        run: python scripts/varredura.py
+
+      - name: Commit e push do relatório
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reports/
+          git diff --cached --quiet || git commit -m "chore: relatório de varredura $(date +%Y-%m-%d)"
+          git push
