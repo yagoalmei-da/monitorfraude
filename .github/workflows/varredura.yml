@@ -34,14 +34,6 @@ jobs:
             python scripts/varredura.py
           fi
 
-      - name: Injetar token no dashboard HTML
-        env:
-          GH_DASHBOARD_TOKEN: ${{ secrets.GH_DASHBOARD_TOKEN }}
-        run: |
-          for f in reports/*_dashboard.html; do
-            sed -i "s/__GH_DASHBOARD_TOKEN__/${GH_DASHBOARD_TOKEN}/g" "$f"
-          done
-
       - name: Commit e push do relatório
         run: |
           git config user.name "github-actions[bot]"

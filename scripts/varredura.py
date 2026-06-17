@@ -495,7 +495,15 @@ def generate_dashboard(date_str, time_str, api_calls, total, filtered, suspects)
 </footer>
 <div class="toast" id="toast"></div>
 <script>
-const GH_TOKEN = '__GH_DASHBOARD_TOKEN__';
+function getToken() {{
+  let t = localStorage.getItem('gh_safelist_token');
+  if (!t) {{
+    t = prompt('Cole seu GitHub Personal Access Token (repo:contents:write) para habilitar o botão Safelist:');
+    if (t) localStorage.setItem('gh_safelist_token', t.trim());
+  }}
+  return t ? t.trim() : null;
+}}
+const GH_TOKEN = null; // carregado via localStorage
 const GH_REPO  = 'yagoalmei-da/monitorfraude';
 const GH_FILE  = 'references/safelist.md';
 const GH_BRANCH = 'main';
@@ -509,11 +517,13 @@ function showToast(msg, ok=true) {{
 }}
 
 async function addToSafelist(btn, domain) {{
+  const token = getToken();
+  if (!token) {{ showToast('Token não informado', false); return; }}
   btn.disabled = true;
   btn.textContent = '…';
   try {{
     const api = `https://api.github.com/repos/${{GH_REPO}}/contents/${{GH_FILE}}`;
-    const headers = {{ Authorization: `Bearer ${{GH_TOKEN}}`, Accept: 'application/vnd.github+json' }};
+    const headers = {{ Authorization: `Bearer ${{token}}`, Accept: 'application/vnd.github+json' }};
     const meta = await fetch(api + `?ref=${{GH_BRANCH}}`, {{ headers }}).then(r => r.json());
     const current = atob(meta.content.replace(/\\n/g,''));
     if (current.includes(domain)) {{
@@ -535,6 +545,7 @@ async function addToSafelist(btn, domain) {{
     btn.textContent = '✓ adicionado';
     showToast(`✅ ${{domain}} adicionado à safelist`);
   }} catch(e) {{
+    if (e.message && e.message.includes('401')) localStorage.removeItem('gh_safelist_token');
     btn.disabled = false;
     btn.textContent = '+ Safelist';
     showToast(`Erro: ${{e.message}}`, false);
