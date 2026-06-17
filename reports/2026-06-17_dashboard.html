@@ -74,24 +74,24 @@ footer{text-align:center;padding:20px;color:#9ca3af;font-size:12px}
     </div>
   </div>
   <div class="header-right">
-    <span class="last">Última varredura: 2026-06-17 02:06 UTC</span>
+    <span class="last">Última varredura: 2026-06-17 02:35 UTC</span>
     <button class="btn-run" onclick="alert('Varredura automática nos dias 1 e 15 via GitHub Actions.')">▶ Executar agora</button>
   </div>
 </div>
 
 <div class="stats">
-  <div class="stat-card red"><div class="value">4</div><div class="label">Suspeitos</div></div>
+  <div class="stat-card red"><div class="value">8</div><div class="label">Suspeitos</div></div>
   <div class="stat-card orange"><div class="value">0</div><div class="label">Alto Risco</div></div>
   <div class="stat-card green"><div class="value">0</div><div class="label">Safelist (filtrados)</div></div>
-  <div class="stat-card blue"><div class="value">4</div><div class="label">Anunciantes únicos</div></div>
-  <div class="stat-card indigo"><div class="value">1</div><div class="label">Créditos usados</div></div>
+  <div class="stat-card blue"><div class="value">8</div><div class="label">Anunciantes únicos</div></div>
+  <div class="stat-card indigo"><div class="value">32</div><div class="label">Créditos usados</div></div>
 </div>
 
 <div class="tabs-wrap">
   <div class="tabs">
-    <div class="tab active" onclick="switchTab(0)">⚠️ Suspeitos (4)</div>
-    <div class="tab" onclick="switchTab(1)">📊 Todos os Anunciantes (4)</div>
-    <div class="tab" onclick="switchTab(2)">🔍 Queries (1)</div>
+    <div class="tab active" onclick="switchTab(0)">⚠️ Suspeitos (8)</div>
+    <div class="tab" onclick="switchTab(1)">📊 Todos os Anunciantes (8)</div>
+    <div class="tab" onclick="switchTab(2)">🔍 Queries (16)</div>
     <div class="tab" onclick="switchTab(3)">✅ Safelist (47)</div>
     <div class="tab" onclick="switchTab(4)">📈 Histórico</div>
   </div>
@@ -108,7 +108,11 @@ footer{text-align:center;padding:20px;color:#9ca3af;font-size:12px}
       <div class="filters">
         <input class="filter-input" id="s-search" type="text" placeholder="Filtrar..." oninput="filterTable('suspectTable','s-search','s-uf','s-risco')">
         <select class="filter-select" id="s-uf" onchange="filterTable('suspectTable','s-search','s-uf','s-risco')">
-          <option value="">Todas as UFs</option><option>SP</option>
+          <option value="">Todas as UFs</option><option>MG</option>
+<option>PR</option>
+<option>RJ</option>
+<option>SC</option>
+<option>SP</option>
         </select>
         <select class="filter-select" id="s-risco" onchange="filterTable('suspectTable','s-search','s-uf','s-risco')">
           <option value="">Todos os riscos</option>
@@ -156,6 +160,42 @@ footer{text-align:center;padding:20px;color:#9ca3af;font-size:12px}
           <td class="col-motivo">Fora da safelist, sem flags específicas</td>
           <td class="col-date">06-17</td>
           <td><button class="btn-safe" onclick="addToSafelist(this,'parcelenahora.com.br')">+ Safelist</button></td>
+        </tr>
+        <tr data-uf="MG" data-risco="BAIXO">
+          <td><a href="https://www.zignet.com.br/consulta-debitos" target="_blank" class="link">zignet.com.br</a></td>
+          <td><span class="chip">MG</span></td>
+          <td><span class="badge badge-baixo">BAIXO</span></td>
+          <td><span class="chip-query">parcelar multa</span></td>
+          <td class="col-motivo">Fora da safelist, sem flags específicas</td>
+          <td class="col-date">06-17</td>
+          <td><button class="btn-safe" onclick="addToSafelist(this,'zignet.com.br')">+ Safelist</button></td>
+        </tr>
+        <tr data-uf="RJ" data-risco="BAIXO">
+          <td><a href="https://www.acordocerto.com.br/desenrola-brasil" target="_blank" class="link">acordocerto.com.br</a></td>
+          <td><span class="chip">RJ</span></td>
+          <td><span class="badge badge-baixo">BAIXO</span></td>
+          <td><span class="chip-query">parcelar debitos</span></td>
+          <td class="col-motivo">Fora da safelist, sem flags específicas</td>
+          <td class="col-date">06-17</td>
+          <td><button class="btn-safe" onclick="addToSafelist(this,'acordocerto.com.br')">+ Safelist</button></td>
+        </tr>
+        <tr data-uf="SC" data-risco="BAIXO">
+          <td><a href="https://www.serasa.com.br/limpa-nome-online/" target="_blank" class="link">serasa.com.br</a></td>
+          <td><span class="chip">SC</span></td>
+          <td><span class="badge badge-baixo">BAIXO</span></td>
+          <td><span class="chip-query">parcelar debitos</span></td>
+          <td class="col-motivo">Fora da safelist, sem flags específicas</td>
+          <td class="col-date">06-17</td>
+          <td><button class="btn-safe" onclick="addToSafelist(this,'serasa.com.br')">+ Safelist</button></td>
+        </tr>
+        <tr data-uf="PR" data-risco="BAIXO">
+          <td><a href="https://www.google.com.br/goto?url=CAESXQHuR6pN-oKWDacbk3P7FcAD7XiHjyePTWxhT9fxEw6ELoukuyAA_YirSWroIsaY00pvf40J30GOrU47ptT_Q7aga4pMgmK1kINn7vIllKme0CgLqH9tJtYE1_4nzg==" target="_blank" class="link">google.com.br</a></td>
+          <td><span class="chip">PR</span></td>
+          <td><span class="badge badge-baixo">BAIXO</span></td>
+          <td><span class="chip-query">pagar multa</span></td>
+          <td class="col-motivo">Fora da safelist, sem flags específicas</td>
+          <td class="col-date">06-17</td>
+          <td><button class="btn-safe" onclick="addToSafelist(this,'google.com.br')">+ Safelist</button></td>
         </tr></tbody>
     </table>
   </div>
@@ -183,27 +223,67 @@ footer{text-align:center;padding:20px;color:#9ca3af;font-size:12px}
       <tbody>
         <tr data-safelisted="false">
           <td><a href="https://usezapay.com.br" target="_blank" class="link">usezapay.com.br</a></td>
-          <td class="col-center"><strong>4</strong></td>
+          <td class="col-center"><strong>38</strong></td>
           <td><span class="status-suspect">⚠️ Suspeito</span></td>
           <td><span class="badge badge-baixo">BAIXO</span></td>
-          <td><span class="chip">SP</span></td>
-          <td class="col-terms">parcelar multa</td>
+          <td><span class="chip">BA</span> <span class="chip">GO</span> <span class="chip">MG</span> <span class="chip">RJ</span> <span class="chip">RS</span> <span class="chip">SP</span></td>
+          <td class="col-terms">pagar licenciamento, pagar multa, parcelar multa</td>
           <td class="col-date">06-17</td>
           <td class="col-date">06-17</td>
         </tr>
         <tr data-safelisted="false">
           <td><a href="https://despachantedok.com.br" target="_blank" class="link">despachantedok.com.br</a></td>
-          <td class="col-center"><strong>4</strong></td>
+          <td class="col-center"><strong>32</strong></td>
           <td><span class="status-suspect">⚠️ Suspeito</span></td>
           <td><span class="badge badge-baixo">BAIXO</span></td>
-          <td><span class="chip">SP</span></td>
-          <td class="col-terms">parcelar multa</td>
+          <td><span class="chip">BA</span> <span class="chip">MG</span> <span class="chip">PR</span> <span class="chip">RS</span> <span class="chip">SC</span> <span class="chip">SP</span></td>
+          <td class="col-terms">pagar licenciamento, parcelar debitos, parcelar multa</td>
+          <td class="col-date">06-17</td>
+          <td class="col-date">06-17</td>
+        </tr>
+        <tr data-safelisted="false">
+          <td><a href="https://zignet.com.br" target="_blank" class="link">zignet.com.br</a></td>
+          <td class="col-center"><strong>32</strong></td>
+          <td><span class="status-suspect">⚠️ Suspeito</span></td>
+          <td><span class="badge badge-baixo">BAIXO</span></td>
+          <td><span class="chip">BA</span> <span class="chip">GO</span> <span class="chip">MG</span> <span class="chip">PR</span> <span class="chip">RJ</span> <span class="chip">SC</span> <span class="chip">SP</span></td>
+          <td class="col-terms">pagar licenciamento, pagar multa, parcelar debitos, parcelar multa</td>
+          <td class="col-date">06-17</td>
+          <td class="col-date">06-17</td>
+        </tr>
+        <tr data-safelisted="false">
+          <td><a href="https://parcelenahora.com.br" target="_blank" class="link">parcelenahora.com.br</a></td>
+          <td class="col-center"><strong>22</strong></td>
+          <td><span class="status-suspect">⚠️ Suspeito</span></td>
+          <td><span class="badge badge-baixo">BAIXO</span></td>
+          <td><span class="chip">BA</span> <span class="chip">GO</span> <span class="chip">MG</span> <span class="chip">PR</span> <span class="chip">RJ</span> <span class="chip">RS</span> <span class="chip">SC</span> <span class="chip">SP</span></td>
+          <td class="col-terms">parcelar debitos, parcelar multa</td>
+          <td class="col-date">06-17</td>
+          <td class="col-date">06-17</td>
+        </tr>
+        <tr data-safelisted="false">
+          <td><a href="https://google.com.br" target="_blank" class="link">google.com.br</a></td>
+          <td class="col-center"><strong>8</strong></td>
+          <td><span class="status-suspect">⚠️ Suspeito</span></td>
+          <td><span class="badge badge-baixo">BAIXO</span></td>
+          <td><span class="chip">PR</span></td>
+          <td class="col-terms">pagar multa</td>
+          <td class="col-date">06-17</td>
+          <td class="col-date">06-17</td>
+        </tr>
+        <tr data-safelisted="false">
+          <td><a href="https://serasa.com.br" target="_blank" class="link">serasa.com.br</a></td>
+          <td class="col-center"><strong>6</strong></td>
+          <td><span class="status-suspect">⚠️ Suspeito</span></td>
+          <td><span class="badge badge-baixo">BAIXO</span></td>
+          <td><span class="chip">GO</span> <span class="chip">PR</span> <span class="chip">SC</span></td>
+          <td class="col-terms">parcelar debitos</td>
           <td class="col-date">06-17</td>
           <td class="col-date">06-17</td>
         </tr>
         <tr data-safelisted="false">
           <td><a href="https://gringo.com.vc" target="_blank" class="link">gringo.com.vc</a></td>
-          <td class="col-center"><strong>2</strong></td>
+          <td class="col-center"><strong>4</strong></td>
           <td><span class="status-suspect">⚠️ Suspeito</span></td>
           <td><span class="badge badge-medio">MEDIO</span></td>
           <td><span class="chip">SP</span></td>
@@ -212,12 +292,12 @@ footer{text-align:center;padding:20px;color:#9ca3af;font-size:12px}
           <td class="col-date">06-17</td>
         </tr>
         <tr data-safelisted="false">
-          <td><a href="https://parcelenahora.com.br" target="_blank" class="link">parcelenahora.com.br</a></td>
-          <td class="col-center"><strong>2</strong></td>
+          <td><a href="https://acordocerto.com.br" target="_blank" class="link">acordocerto.com.br</a></td>
+          <td class="col-center"><strong>4</strong></td>
           <td><span class="status-suspect">⚠️ Suspeito</span></td>
           <td><span class="badge badge-baixo">BAIXO</span></td>
-          <td><span class="chip">SP</span></td>
-          <td class="col-terms">parcelar multa</td>
+          <td><span class="chip">GO</span> <span class="chip">RJ</span></td>
+          <td class="col-terms">parcelar debitos</td>
           <td class="col-date">06-17</td>
           <td class="col-date">06-17</td>
         </tr></tbody>
@@ -236,7 +316,97 @@ footer{text-align:center;padding:20px;color:#9ca3af;font-size:12px}
           <td><span class="chip-query">parcelar multa</span></td>
           <td><span class="chip">SP</span></td>
           <td class="col-motivo" style="color:#6b7280">São Paulo, São Paulo, Brazil</td>
-          <td class="col-center">6</td>
+          <td class="col-center">12</td>
+        </tr>
+        <tr>
+          <td><span class="chip-query">parcelar multa</span></td>
+          <td><span class="chip">MG</span></td>
+          <td class="col-motivo" style="color:#6b7280">Belo Horizonte, Minas Gerais, Brazil</td>
+          <td class="col-center">12</td>
+        </tr>
+        <tr>
+          <td><span class="chip-query">parcelar multa</span></td>
+          <td><span class="chip">RS</span></td>
+          <td class="col-motivo" style="color:#6b7280">Porto Alegre, Rio Grande do Sul, Brazil</td>
+          <td class="col-center">10</td>
+        </tr>
+        <tr>
+          <td><span class="chip-query">parcelar multa</span></td>
+          <td><span class="chip">BA</span></td>
+          <td class="col-motivo" style="color:#6b7280">Salvador, Bahia, Brazil</td>
+          <td class="col-center">10</td>
+        </tr>
+        <tr>
+          <td><span class="chip-query">parcelar debitos</span></td>
+          <td><span class="chip">RJ</span></td>
+          <td class="col-motivo" style="color:#6b7280">Rio de Janeiro, Rio de Janeiro, Brazil</td>
+          <td class="col-center">10</td>
+        </tr>
+        <tr>
+          <td><span class="chip-query">parcelar debitos</span></td>
+          <td><span class="chip">SC</span></td>
+          <td class="col-motivo" style="color:#6b7280">Florianópolis, Santa Catarina, Brazil</td>
+          <td class="col-center">12</td>
+        </tr>
+        <tr>
+          <td><span class="chip-query">parcelar debitos</span></td>
+          <td><span class="chip">PR</span></td>
+          <td class="col-motivo" style="color:#6b7280">Curitiba, Paraná, Brazil</td>
+          <td class="col-center">12</td>
+        </tr>
+        <tr>
+          <td><span class="chip-query">parcelar debitos</span></td>
+          <td><span class="chip">GO</span></td>
+          <td class="col-motivo" style="color:#6b7280">Goiânia, Goiás, Brazil</td>
+          <td class="col-center">8</td>
+        </tr>
+        <tr>
+          <td><span class="chip-query">pagar licenciamento</span></td>
+          <td><span class="chip">SP</span></td>
+          <td class="col-motivo" style="color:#6b7280">São Paulo, São Paulo, Brazil</td>
+          <td class="col-center">10</td>
+        </tr>
+        <tr>
+          <td><span class="chip-query">pagar licenciamento</span></td>
+          <td><span class="chip">MG</span></td>
+          <td class="col-motivo" style="color:#6b7280">Belo Horizonte, Minas Gerais, Brazil</td>
+          <td class="col-center">4</td>
+        </tr>
+        <tr>
+          <td><span class="chip-query">pagar licenciamento</span></td>
+          <td><span class="chip">RS</span></td>
+          <td class="col-motivo" style="color:#6b7280">Porto Alegre, Rio Grande do Sul, Brazil</td>
+          <td class="col-center">4</td>
+        </tr>
+        <tr>
+          <td><span class="chip-query">pagar licenciamento</span></td>
+          <td><span class="chip">BA</span></td>
+          <td class="col-motivo" style="color:#6b7280">Salvador, Bahia, Brazil</td>
+          <td class="col-center">10</td>
+        </tr>
+        <tr>
+          <td><span class="chip-query">pagar multa</span></td>
+          <td><span class="chip">RJ</span></td>
+          <td class="col-motivo" style="color:#6b7280">Rio de Janeiro, Rio de Janeiro, Brazil</td>
+          <td class="col-center">4</td>
+        </tr>
+        <tr>
+          <td><span class="chip-query">pagar multa</span></td>
+          <td><span class="chip">SC</span></td>
+          <td class="col-motivo" style="color:#6b7280">Florianópolis, Santa Catarina, Brazil</td>
+          <td class="col-center">0</td>
+        </tr>
+        <tr>
+          <td><span class="chip-query">pagar multa</span></td>
+          <td><span class="chip">PR</span></td>
+          <td class="col-motivo" style="color:#6b7280">Curitiba, Paraná, Brazil</td>
+          <td class="col-center">8</td>
+        </tr>
+        <tr>
+          <td><span class="chip-query">pagar multa</span></td>
+          <td><span class="chip">GO</span></td>
+          <td class="col-motivo" style="color:#6b7280">Goiânia, Goiás, Brazil</td>
+          <td class="col-center">8</td>
         </tr></tbody>
     </table>
   </div>
@@ -405,7 +575,7 @@ footer{text-align:center;padding:20px;color:#9ca3af;font-size:12px}
       <div class="bar-row">
         <span class="date">06-17</span>
         <div class="bar-wrap"><div class="bar" style="width:100%"></div></div>
-        <span class="count">12</span>
+        <span class="count">146</span>
       </div></div>
   </div>
 </div>

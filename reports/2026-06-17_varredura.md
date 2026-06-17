@@ -1,9 +1,9 @@
 # Relatório de Varredura — Fraudes em Débitos Veiculares
 
 **Data:** 2026-06-17  
-**Hora:** 2026-06-17 02:06 UTC  
+**Hora:** 2026-06-17 02:35 UTC  
 **Queries:** 16 (4 termos × 8 UFs)  
-**Créditos SerpAPI consumidos:** 1  
+**Créditos SerpAPI consumidos:** 32  
 
 ---
 
@@ -11,12 +11,12 @@
 
 | Métrica | Valor |
 |---|---|
-| Anúncios encontrados | 6 |
+| Anúncios encontrados | 134 |
 | Filtrados pela safelist | 0 |
-| Domínios suspeitos únicos | 4 |
+| Domínios suspeitos únicos | 8 |
 | 🔴 Alto risco | 0 |
 | 🟠 Médio risco | 1 |
-| ⚠️ Baixo risco | 3 |
+| ⚠️ Baixo risco | 7 |
 
 ## 🟠 Sites de MÉDIO RISCO
 
@@ -31,6 +31,10 @@
 | usezapay.com.br | SP | parcelar multa |
 | despachantedok.com.br | SP | parcelar multa |
 | parcelenahora.com.br | SP | parcelar multa |
+| zignet.com.br | MG | parcelar multa |
+| acordocerto.com.br | RJ | parcelar debitos |
+| serasa.com.br | SC | parcelar debitos |
+| google.com.br | PR | pagar multa |
 
 ---
 
