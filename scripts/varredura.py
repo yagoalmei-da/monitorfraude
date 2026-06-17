@@ -641,7 +641,13 @@ async function addToSafelist(btn, domain) {{
     const headers = {{ Authorization: `Bearer ${{token}}`, Accept: 'application/vnd.github+json' }};
     const meta = await fetch(api + `?ref=${{GH_BRANCH}}`, {{headers}}).then(r => r.json());
     const current = atob(meta.content.replace(/\\n/g,''));
-    if (current.includes(domain)) {{ btn.textContent = '✓ já existe'; showToast(`${{domain}} já está na safelist`); return; }}
+    if (current.includes(domain)) {{
+      btn.textContent = '✓ já existe'; showToast(`${{domain}} já está na safelist`);
+      btn.closest('tr').style.opacity = '0.3';
+      btn.closest('tr').style.transition = 'opacity .4s';
+      setTimeout(() => btn.closest('tr').classList.add('row-hidden'), 400);
+      return;
+    }}
     const updated = current.trimEnd() + `\\n- ${{domain}}\\n`;
     await fetch(api, {{
       method: 'PUT', headers: {{...headers, 'Content-Type': 'application/json'}},
