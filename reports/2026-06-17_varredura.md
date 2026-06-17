@@ -1,7 +1,7 @@
 # Relatório de Varredura — Fraudes em Débitos Veiculares
 
 **Data:** 2026-06-17  
-**Hora:** 2026-06-17 02:04 UTC  
+**Hora:** 2026-06-17 02:06 UTC  
 **Queries:** 16 (4 termos × 8 UFs)  
 **Créditos SerpAPI consumidos:** 1  
 

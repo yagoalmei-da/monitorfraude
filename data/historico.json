@@ -2,10 +2,20 @@
   "usezapay.com.br": {
     "primeira_vez": "2026-06-17",
     "ultima_vez": "2026-06-17",
-    "ocorrencias": 2,
+    "ocorrencias": 4,
     "safelisted": false,
     "risco": "BAIXO",
     "aparicoes": [
+      {
+        "data": "2026-06-17",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-06-17",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
       {
         "data": "2026-06-17",
         "termo": "parcelar multa",
@@ -21,10 +31,15 @@
   "gringo.com.vc": {
     "primeira_vez": "2026-06-17",
     "ultima_vez": "2026-06-17",
-    "ocorrencias": 1,
+    "ocorrencias": 2,
     "safelisted": false,
     "risco": "MEDIO",
     "aparicoes": [
+      {
+        "data": "2026-06-17",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
       {
         "data": "2026-06-17",
         "termo": "parcelar multa",
@@ -35,10 +50,20 @@
   "despachantedok.com.br": {
     "primeira_vez": "2026-06-17",
     "ultima_vez": "2026-06-17",
-    "ocorrencias": 2,
+    "ocorrencias": 4,
     "safelisted": false,
     "risco": "BAIXO",
     "aparicoes": [
+      {
+        "data": "2026-06-17",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-06-17",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
       {
         "data": "2026-06-17",
         "termo": "parcelar multa",
@@ -54,10 +79,15 @@
   "parcelenahora.com.br": {
     "primeira_vez": "2026-06-17",
     "ultima_vez": "2026-06-17",
-    "ocorrencias": 1,
+    "ocorrencias": 2,
     "safelisted": false,
     "risco": "BAIXO",
     "aparicoes": [
+      {
+        "data": "2026-06-17",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
       {
         "data": "2026-06-17",
         "termo": "parcelar multa",
