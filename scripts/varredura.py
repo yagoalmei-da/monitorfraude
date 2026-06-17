@@ -28,18 +28,16 @@ LOCATIONS = {
     "PR": "Curitiba, Paraná, Brazil",
 }
 
-# 5 termos × 4 UFs (rotacionadas) × 2 páginas = 40 créditos por varredura
+# 4 termos × 4 UFs (rotacionadas) × 2 páginas = 32 créditos por varredura
 QUERIES = [
-    ("pagar ipva",            "SP"), ("pagar ipva",            "MG"),
-    ("pagar ipva",            "RS"), ("pagar ipva",            "BA"),
-    ("parcelar ipva",         "RJ"), ("parcelar ipva",         "SC"),
-    ("parcelar ipva",         "PR"), ("parcelar ipva",         "GO"),
-    ("pagar multa",           "SP"), ("pagar multa",           "MG"),
-    ("pagar multa",           "RS"), ("pagar multa",           "BA"),
-    ("parcelar multa",        "RJ"), ("parcelar multa",        "SC"),
-    ("parcelar multa",        "PR"), ("parcelar multa",        "GO"),
-    ("consulta placa detran", "SP"), ("consulta placa detran", "RJ"),
-    ("consulta placa detran", "MG"), ("consulta placa detran", "SC"),
+    ("parcelar multa",        "SP"), ("parcelar multa",        "MG"),
+    ("parcelar multa",        "RS"), ("parcelar multa",        "BA"),
+    ("parcelar debitos",      "RJ"), ("parcelar debitos",      "SC"),
+    ("parcelar debitos",      "PR"), ("parcelar debitos",      "GO"),
+    ("pagar licenciamento",   "SP"), ("pagar licenciamento",   "MG"),
+    ("pagar licenciamento",   "RS"), ("pagar licenciamento",   "BA"),
+    ("pagar multa",           "RJ"), ("pagar multa",           "SC"),
+    ("pagar multa",           "PR"), ("pagar multa",           "GO"),
 ]
 
 # TLDs de países que imitam siglas de estados brasileiros
