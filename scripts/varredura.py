@@ -648,6 +648,9 @@ async function addToSafelist(btn, domain) {{
       body: JSON.stringify({{ message: `chore: adicionar ${{domain}} à safelist`, content: btoa(unescape(encodeURIComponent(updated))), sha: meta.sha, branch: GH_BRANCH }})
     }});
     btn.textContent = '✓ adicionado'; showToast(`✅ ${{domain}} adicionado à safelist`);
+    btn.closest('tr').style.opacity = '0.3';
+    btn.closest('tr').style.transition = 'opacity .4s';
+    setTimeout(() => btn.closest('tr').classList.add('row-hidden'), 400);
   }} catch(e) {{
     btn.disabled = false; btn.textContent = '+ Safelist'; showToast(`Erro: ${{e.message}}`, false);
   }}
