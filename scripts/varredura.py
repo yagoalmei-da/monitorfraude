@@ -17,31 +17,29 @@ from pathlib import Path
 ROOT = Path(__file__).parent.parent
 SERPAPI_KEY = os.environ["SERPAPI_KEY"]
 
+LOCATIONS = {
+    "SP": "São Paulo, São Paulo, Brazil",
+    "SC": "Florianópolis, Santa Catarina, Brazil",
+    "MG": "Belo Horizonte, Minas Gerais, Brazil",
+    "RJ": "Rio de Janeiro, Rio de Janeiro, Brazil",
+    "BA": "Salvador, Bahia, Brazil",
+    "GO": "Goiânia, Goiás, Brazil",
+    "RS": "Porto Alegre, Rio Grande do Sul, Brazil",
+    "PR": "Curitiba, Paraná, Brazil",
+}
+
+# 5 termos × 4 UFs (rotacionadas) × 2 páginas = 40 créditos por varredura
 QUERIES = [
-    ("pagar debitos SP",           "São Paulo, São Paulo, Brazil"),
-    ("pagar debitos SC",           "Florianópolis, Santa Catarina, Brazil"),
-    ("pagar debitos MG",           "Belo Horizonte, Minas Gerais, Brazil"),
-    ("pagar debitos RJ",           "Rio de Janeiro, Rio de Janeiro, Brazil"),
-    ("pagar debitos BA",           "Salvador, Bahia, Brazil"),
-    ("pagar debitos GO",           "Goiânia, Goiás, Brazil"),
-    ("pagar debitos RS",           "Porto Alegre, Rio Grande do Sul, Brazil"),
-    ("pagar debitos PR",           "Curitiba, Paraná, Brazil"),
-    ("pagar ipva SP",              "São Paulo, São Paulo, Brazil"),
-    ("pagar ipva SC",              "Florianópolis, Santa Catarina, Brazil"),
-    ("pagar ipva MG",              "Belo Horizonte, Minas Gerais, Brazil"),
-    ("pagar ipva RJ",              "Rio de Janeiro, Rio de Janeiro, Brazil"),
-    ("pagar ipva BA",              "Salvador, Bahia, Brazil"),
-    ("pagar ipva GO",              "Goiânia, Goiás, Brazil"),
-    ("pagar ipva RS",              "Porto Alegre, Rio Grande do Sul, Brazil"),
-    ("pagar ipva PR",              "Curitiba, Paraná, Brazil"),
-    ("detran consulta placa SP",   "São Paulo, São Paulo, Brazil"),
-    ("detran consulta placa SC",   "Florianópolis, Santa Catarina, Brazil"),
-    ("detran consulta placa MG",   "Belo Horizonte, Minas Gerais, Brazil"),
-    ("detran consulta placa RJ",   "Rio de Janeiro, Rio de Janeiro, Brazil"),
-    ("detran consulta placa BA",   "Salvador, Bahia, Brazil"),
-    ("detran consulta placa GO",   "Goiânia, Goiás, Brazil"),
-    ("detran consulta placa RS",   "Porto Alegre, Rio Grande do Sul, Brazil"),
-    ("detran consulta placa PR",   "Curitiba, Paraná, Brazil"),
+    ("pagar ipva",            "SP"), ("pagar ipva",            "MG"),
+    ("pagar ipva",            "RS"), ("pagar ipva",            "BA"),
+    ("parcelar ipva",         "RJ"), ("parcelar ipva",         "SC"),
+    ("parcelar ipva",         "PR"), ("parcelar ipva",         "GO"),
+    ("pagar multa",           "SP"), ("pagar multa",           "MG"),
+    ("pagar multa",           "RS"), ("pagar multa",           "BA"),
+    ("parcelar multa",        "RJ"), ("parcelar multa",        "SC"),
+    ("parcelar multa",        "PR"), ("parcelar multa",        "GO"),
+    ("consulta placa detran", "SP"), ("consulta placa detran", "RJ"),
+    ("consulta placa detran", "MG"), ("consulta placa detran", "SC"),
 ]
 
 # TLDs de países que imitam siglas de estados brasileiros
@@ -172,10 +170,10 @@ def run(test_mode=False):
     api_calls = 0
     suspects = []  # list of dicts
 
-    pages = [0] if test_mode else [0, 10, 20]
+    pages = [0] if test_mode else [0, 10]
 
-    for query, location in queries:
-        uf = query.split()[-1]  # SP, SC, MG...
+    for query, uf in queries:
+        location = LOCATIONS[uf]
         for page, start in enumerate(pages, start=1):
             try:
                 data = serpapi_call(query, location, start)
@@ -337,13 +335,14 @@ def generate_dashboard(date_str, time_str, api_calls, total, filtered, suspects)
     for s in suspects:
         domain_url = s["url"] or f"https://{s['domain']}"
         rows_html += f"""
-        <tr data-uf="{s['uf']}" data-risco="{s['risco']}">
+        <tr data-uf="{s['uf']}" data-risco="{s['risco']}" id="row-{s['domain'].replace('.', '-')}">
           <td class="domain"><a href="{domain_url}" target="_blank">{s['domain']}</a></td>
           <td class="uf"><span>{s['uf']}</span></td>
           <td>{badge(s['risco'])}</td>
           <td class="query"><span>{s['query']}</span></td>
           <td class="motivo">{s['motivo']}</td>
           <td class="enc">{date_str[5:]}</td>
+          <td><button class="btn-safe" onclick="addToSafelist(this, '{s['domain']}')">+ Safelist</button></td>
         </tr>"""
 
     ufs = sorted({s["uf"] for s in suspects})
@@ -413,6 +412,11 @@ def generate_dashboard(date_str, time_str, api_calls, total, filtered, suspects)
   .bar-row .count {{ width: 28px; text-align: right; font-weight: 700; color: #ef4444; }}
   footer {{ text-align: center; padding: 20px; color: #9ca3af; font-size: 12px; }}
   .row-hidden {{ display: none; }}
+  .btn-safe {{ background: #f0fdf4; color: #16a34a; border: 1px solid #86efac; border-radius: 5px; padding: 3px 9px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }}
+  .btn-safe:hover {{ background: #dcfce7; }}
+  .btn-safe:disabled {{ background: #f1f5f9; color: #94a3b8; border-color: #e2e8f0; cursor: default; }}
+  .toast {{ position: fixed; bottom: 24px; right: 24px; background: #1e2533; color: #fff; border-radius: 8px; padding: 12px 18px; font-size: 13px; box-shadow: 0 4px 12px rgba(0,0,0,.2); z-index: 999; opacity: 0; transition: opacity .3s; pointer-events: none; }}
+  .toast.show {{ opacity: 1; }}
 </style>
 </head>
 <body>
@@ -457,7 +461,7 @@ def generate_dashboard(date_str, time_str, api_calls, total, filtered, suspects)
     <table id="suspectTable">
       <thead><tr>
         <th>Domínio / URL</th><th>UF</th><th>Risco</th>
-        <th>Termo de Busca</th><th>Motivo</th><th>Enc.</th>
+        <th>Termo de Busca</th><th>Motivo</th><th>Enc.</th><th></th>
       </tr></thead>
       <tbody>{rows_html}</tbody>
     </table>
@@ -489,7 +493,54 @@ def generate_dashboard(date_str, time_str, api_calls, total, filtered, suspects)
   <span>Yago Teixeira</span> ·
   <span>Corpay</span>
 </footer>
+<div class="toast" id="toast"></div>
 <script>
+const GH_TOKEN = '__GH_DASHBOARD_TOKEN__';
+const GH_REPO  = 'yagoalmei-da/monitorfraude';
+const GH_FILE  = 'references/safelist.md';
+const GH_BRANCH = 'main';
+
+function showToast(msg, ok=true) {{
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = ok ? '#16a34a' : '#dc2626';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}}
+
+async function addToSafelist(btn, domain) {{
+  btn.disabled = true;
+  btn.textContent = '…';
+  try {{
+    const api = `https://api.github.com/repos/${{GH_REPO}}/contents/${{GH_FILE}}`;
+    const headers = {{ Authorization: `Bearer ${{GH_TOKEN}}`, Accept: 'application/vnd.github+json' }};
+    const meta = await fetch(api + `?ref=${{GH_BRANCH}}`, {{ headers }}).then(r => r.json());
+    const current = atob(meta.content.replace(/\\n/g,''));
+    if (current.includes(domain)) {{
+      btn.textContent = '✓ já existe';
+      showToast(`${{domain}} já está na safelist`);
+      return;
+    }}
+    const updated = current.trimEnd() + `\\n- ${{domain}}\\n`;
+    await fetch(api, {{
+      method: 'PUT',
+      headers: {{ ...headers, 'Content-Type': 'application/json' }},
+      body: JSON.stringify({{
+        message: `chore: adicionar ${{domain}} à safelist`,
+        content: btoa(unescape(encodeURIComponent(updated))),
+        sha: meta.sha,
+        branch: GH_BRANCH,
+      }})
+    }});
+    btn.textContent = '✓ adicionado';
+    showToast(`✅ ${{domain}} adicionado à safelist`);
+  }} catch(e) {{
+    btn.disabled = false;
+    btn.textContent = '+ Safelist';
+    showToast(`Erro: ${{e.message}}`, false);
+  }}
+}}
+
 function applyFilters() {{
   const search = document.getElementById('searchInput').value.toLowerCase();
   const uf = document.getElementById('ufFilter').value;
