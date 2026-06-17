@@ -1,0 +1,68 @@
+{
+  "usezapay.com.br": {
+    "primeira_vez": "2026-06-17",
+    "ultima_vez": "2026-06-17",
+    "ocorrencias": 2,
+    "safelisted": false,
+    "risco": "BAIXO",
+    "aparicoes": [
+      {
+        "data": "2026-06-17",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-06-17",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      }
+    ]
+  },
+  "gringo.com.vc": {
+    "primeira_vez": "2026-06-17",
+    "ultima_vez": "2026-06-17",
+    "ocorrencias": 1,
+    "safelisted": false,
+    "risco": "MEDIO",
+    "aparicoes": [
+      {
+        "data": "2026-06-17",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      }
+    ]
+  },
+  "despachantedok.com.br": {
+    "primeira_vez": "2026-06-17",
+    "ultima_vez": "2026-06-17",
+    "ocorrencias": 2,
+    "safelisted": false,
+    "risco": "BAIXO",
+    "aparicoes": [
+      {
+        "data": "2026-06-17",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-06-17",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      }
+    ]
+  },
+  "parcelenahora.com.br": {
+    "primeira_vez": "2026-06-17",
+    "ultima_vez": "2026-06-17",
+    "ocorrencias": 1,
+    "safelisted": false,
+    "risco": "BAIXO",
+    "aparicoes": [
+      {
+        "data": "2026-06-17",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      }
+    ]
+  }
+}
