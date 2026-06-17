@@ -495,15 +495,23 @@ def generate_dashboard(date_str, time_str, api_calls, total, filtered, suspects)
 </footer>
 <div class="toast" id="toast"></div>
 <script>
-function getToken() {{
-  let t = localStorage.getItem('gh_safelist_token');
-  if (!t) {{
-    t = prompt('Cole seu GitHub Personal Access Token (repo:contents:write) para habilitar o botão Safelist:');
-    if (t) localStorage.setItem('gh_safelist_token', t.trim());
-  }}
-  return t ? t.trim() : null;
+const _ENC = '342d3d0f2821263701057516722538331639251c2d056a04281371082d3a352a772b71033b2f1806';
+const _PWD = 'SEMPARARDOC';
+function _decode(hex, pwd) {{
+  const bytes = hex.match(/.{{2}}/g).map(h => parseInt(h, 16));
+  return bytes.map((b, i) => String.fromCharCode(b ^ pwd.charCodeAt(i % pwd.length))).join('');
 }}
-const GH_TOKEN = null; // carregado via localStorage
+function getToken() {{
+  let cached = sessionStorage.getItem('_st');
+  if (cached) return cached;
+  const pwd = prompt('Senha de acesso:');
+  if (!pwd) return null;
+  const t = _decode(_ENC, pwd);
+  if (!t.startsWith('ghp_')) {{ alert('Senha incorreta.'); return null; }}
+  sessionStorage.setItem('_st', t);
+  return t;
+}}
+const GH_TOKEN = null;
 const GH_REPO  = 'yagoalmei-da/monitorfraude';
 const GH_FILE  = 'references/safelist.md';
 const GH_BRANCH = 'main';
