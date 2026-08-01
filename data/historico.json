@@ -1,8 +1,8 @@
 {
   "usezapay.com.br": {
     "primeira_vez": "2026-06-17",
-    "ultima_vez": "2026-07-15",
-    "ocorrencias": 102,
+    "ultima_vez": "2026-08-01",
+    "ocorrencias": 140,
     "safelisted": false,
     "risco": "BAIXO",
     "aparicoes": [
@@ -515,13 +515,203 @@
         "data": "2026-07-15",
         "termo": "pagar multa",
         "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "GO"
       }
     ]
   },
   "gringo.com.vc": {
     "primeira_vez": "2026-06-17",
-    "ultima_vez": "2026-07-15",
-    "ocorrencias": 18,
+    "ultima_vez": "2026-08-01",
+    "ocorrencias": 30,
     "safelisted": false,
     "risco": "MEDIO",
     "aparicoes": [
@@ -614,13 +804,73 @@
         "data": "2026-07-15",
         "termo": "pagar multa",
         "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "PR"
       }
     ]
   },
   "despachantedok.com.br": {
     "primeira_vez": "2026-06-17",
-    "ultima_vez": "2026-07-15",
-    "ocorrencias": 74,
+    "ultima_vez": "2026-08-01",
+    "ocorrencias": 92,
     "safelisted": false,
     "risco": "BAIXO",
     "aparicoes": [
@@ -993,6 +1243,96 @@
         "data": "2026-07-15",
         "termo": "pagar multa",
         "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "SP"
       }
     ]
   },
@@ -1207,8 +1547,8 @@
   },
   "zignet.com.br": {
     "primeira_vez": "2026-06-17",
-    "ultima_vez": "2026-07-15",
-    "ocorrencias": 42,
+    "ultima_vez": "2026-08-01",
+    "ocorrencias": 74,
     "safelisted": false,
     "risco": "BAIXO",
     "aparicoes": [
@@ -1420,14 +1760,174 @@
       {
         "data": "2026-07-15",
         "termo": "parcelar debitos",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
         "uf": "GO"
       }
     ]
   },
   "acordocerto.com.br": {
     "primeira_vez": "2026-06-17",
-    "ultima_vez": "2026-07-15",
-    "ocorrencias": 22,
+    "ultima_vez": "2026-08-01",
+    "ocorrencias": 28,
     "safelisted": false,
     "risco": "BAIXO",
     "aparicoes": [
@@ -1540,6 +2040,36 @@
         "data": "2026-07-15",
         "termo": "parcelar debitos",
         "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "PR"
       }
     ]
   },
@@ -1693,8 +2223,8 @@
   },
   "online.prontopaguei.com": {
     "primeira_vez": "2026-07-01",
-    "ultima_vez": "2026-07-15",
-    "ocorrencias": 55,
+    "ultima_vez": "2026-08-01",
+    "ocorrencias": 95,
     "safelisted": false,
     "risco": "BAIXO",
     "aparicoes": [
@@ -1970,6 +2500,206 @@
       },
       {
         "data": "2026-07-15",
+        "termo": "pagar multa",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "SP"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
         "termo": "pagar multa",
         "uf": "GO"
       }
@@ -1977,8 +2707,8 @@
   },
   "menortaxa.pagplan.com.br": {
     "primeira_vez": "2026-07-01",
-    "ultima_vez": "2026-07-01",
-    "ocorrencias": 12,
+    "ultima_vez": "2026-08-01",
+    "ocorrencias": 30,
     "safelisted": false,
     "risco": "BAIXO",
     "aparicoes": [
@@ -2041,6 +2771,96 @@
         "data": "2026-07-01",
         "termo": "pagar multa",
         "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "MG"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar multa",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar licenciamento",
+        "uf": "RS"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "SC"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "PR"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "pagar multa",
+        "uf": "PR"
       }
     ]
   },
@@ -2114,8 +2934,8 @@
   },
   "itau.com.br": {
     "primeira_vez": "2026-07-15",
-    "ultima_vez": "2026-07-15",
-    "ocorrencias": 6,
+    "ultima_vez": "2026-08-01",
+    "ocorrencias": 10,
     "safelisted": false,
     "risco": "BAIXO",
     "aparicoes": [
@@ -2146,6 +2966,26 @@
       },
       {
         "data": "2026-07-15",
+        "termo": "parcelar debitos",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "RJ"
+      },
+      {
+        "data": "2026-08-01",
+        "termo": "parcelar debitos",
+        "uf": "GO"
+      },
+      {
+        "data": "2026-08-01",
         "termo": "parcelar debitos",
         "uf": "GO"
       }
