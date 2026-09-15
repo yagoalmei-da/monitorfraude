@@ -1,8 +1,8 @@
 {
   "usezapay.com.br": {
     "primeira_vez": "2026-06-17",
-    "ultima_vez": "2026-08-15",
-    "ocorrencias": 172,
+    "ultima_vez": "2026-09-15",
+    "ocorrencias": 176,
     "safelisted": false,
     "risco": "BAIXO",
     "aparicoes": [
@@ -865,6 +865,26 @@
         "data": "2026-08-15",
         "termo": "pagar multa",
         "uf": "GO"
+      },
+      {
+        "data": "2026-09-15",
+        "termo": "pagar licenciamento",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-09-15",
+        "termo": "pagar licenciamento",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-09-15",
+        "termo": "pagar licenciamento",
+        "uf": "BA"
+      },
+      {
+        "data": "2026-09-15",
+        "termo": "pagar licenciamento",
+        "uf": "BA"
       }
     ]
   },
@@ -2276,8 +2296,8 @@
   },
   "acordocerto.com.br": {
     "primeira_vez": "2026-06-17",
-    "ultima_vez": "2026-08-15",
-    "ocorrencias": 34,
+    "ultima_vez": "2026-09-15",
+    "ocorrencias": 35,
     "safelisted": false,
     "risco": "BAIXO",
     "aparicoes": [
@@ -2450,6 +2470,11 @@
         "data": "2026-08-15",
         "termo": "parcelar debitos",
         "uf": "GO"
+      },
+      {
+        "data": "2026-09-15",
+        "termo": "parcelar debitos",
+        "uf": "SC"
       }
     ]
   },
@@ -3757,8 +3782,8 @@
   },
   "menortaxa.pagplan.com.br": {
     "primeira_vez": "2026-07-01",
-    "ultima_vez": "2026-08-15",
-    "ocorrencias": 46,
+    "ultima_vez": "2026-09-15",
+    "ocorrencias": 47,
     "safelisted": false,
     "risco": "BAIXO",
     "aparicoes": [
@@ -3991,6 +4016,11 @@
         "data": "2026-08-15",
         "termo": "pagar multa",
         "uf": "GO"
+      },
+      {
+        "data": "2026-09-15",
+        "termo": "parcelar debitos",
+        "uf": "SC"
       }
     ]
   },
@@ -4025,8 +4055,8 @@
   },
   "prontopaguei.com": {
     "primeira_vez": "2026-07-15",
-    "ultima_vez": "2026-08-15",
-    "ocorrencias": 14,
+    "ultima_vez": "2026-09-15",
+    "ocorrencias": 15,
     "safelisted": false,
     "risco": "BAIXO",
     "aparicoes": [
@@ -4099,13 +4129,18 @@
         "data": "2026-08-15",
         "termo": "parcelar debitos",
         "uf": "GO"
+      },
+      {
+        "data": "2026-09-15",
+        "termo": "parcelar debitos",
+        "uf": "SC"
       }
     ]
   },
   "itau.com.br": {
     "primeira_vez": "2026-07-15",
-    "ultima_vez": "2026-08-15",
-    "ocorrencias": 12,
+    "ultima_vez": "2026-09-15",
+    "ocorrencias": 13,
     "safelisted": false,
     "risco": "BAIXO",
     "aparicoes": [
@@ -4168,6 +4203,11 @@
         "data": "2026-08-15",
         "termo": "parcelar debitos",
         "uf": "GO"
+      },
+      {
+        "data": "2026-09-15",
+        "termo": "parcelar debitos",
+        "uf": "SC"
       }
     ]
   },
